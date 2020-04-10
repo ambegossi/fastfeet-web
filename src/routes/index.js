@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+import Route from './Route';
 
 import SignIn from '../pages/SignIn';
 
@@ -21,16 +22,28 @@ export default function Routes() {
   return (
     <Switch>
       <Route path="/" exact component={SignIn} />
-      <Route path="/deliveries" exact component={Deliveries} />
-      <Route path="/deliveries/register" component={DeliveryRegister} />
-      <Route path="/deliveries/edit" component={DeliveryEdit} />
-      <Route path="/deliverymen" exact component={Deliverymen} />
-      <Route path="/deliverymen/register" component={DeliverymanRegister} />
-      <Route path="/deliverymen/edit" component={DeliverymanEdit} />
-      <Route path="/recipients" exact component={Recipients} />
-      <Route path="/recipients/register" component={RecipientRegister} />
-      <Route path="/recipients/edit" component={RecipientEdit} />
-      <Route path="/problems" exact component={Problems} />
+      <Route path="/deliveries" exact component={Deliveries} isPrivate />
+      <Route
+        path="/deliveries/register"
+        component={DeliveryRegister}
+        isPrivate
+      />
+      <Route path="/deliveries/edit" component={DeliveryEdit} isPrivate />
+      <Route path="/deliverymen" exact component={Deliverymen} isPrivate />
+      <Route
+        path="/deliverymen/register"
+        component={DeliverymanRegister}
+        isPrivate
+      />
+      <Route path="/deliverymen/edit" component={DeliverymanEdit} isPrivate />
+      <Route path="/recipients" exact component={Recipients} isPrivate />
+      <Route
+        path="/recipients/register"
+        component={RecipientRegister}
+        isPrivate
+      />
+      <Route path="/recipients/edit" component={RecipientEdit} isPrivate />
+      <Route path="/problems" exact component={Problems} isPrivate />
     </Switch>
   );
 }
