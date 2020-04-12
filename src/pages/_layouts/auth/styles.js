@@ -58,6 +58,13 @@ export const Content = styled.div`
       }
     }
 
+    span {
+      color: #fb6f91;
+      align-self: flex-start;
+      margin: 0 0 10px 32px;
+      font-weight: bold;
+    }
+
     button {
       margin: 5px 0 0;
       width: 300px;
