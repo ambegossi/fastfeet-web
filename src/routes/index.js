@@ -7,16 +7,16 @@ import SignIn from '../pages/SignIn';
 import Problems from '../pages/Problems';
 
 import Deliveries from '../pages/Deliveries';
-import DeliveryRegister from '../pages/Deliveries/Register';
-import DeliveryEdit from '../pages/Deliveries/Edit';
+import DeliveryRegister from '../pages/Deliveries/DeliveryRegister';
+import DeliveryEdit from '../pages/Deliveries/DeliveryEdit';
 
 import Deliverymen from '../pages/Deliverymen';
-import DeliverymanRegister from '../pages/Deliverymen/Register';
-import DeliverymanEdit from '../pages/Deliverymen/Edit';
+import DeliverymanRegister from '../pages/Deliverymen/DeliverymenRegister';
+import DeliverymanEdit from '../pages/Deliverymen/DeliverymenEdit';
 
 import Recipients from '../pages/Recipients';
-import RecipientRegister from '../pages/Recipients/Register';
-import RecipientEdit from '../pages/Recipients/Edit';
+import RecipientRegister from '../pages/Recipients/RecipientsRegister';
+import RecipientEdit from '../pages/Recipients/RecipientsEdit';
 
 export default function Routes() {
   return (
