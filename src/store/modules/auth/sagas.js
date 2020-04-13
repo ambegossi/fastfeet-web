@@ -13,9 +13,9 @@ export function* signIn({ payload }) {
     password,
   });
 
-  const { token } = response.data;
+  const { token, user } = response.data;
 
-  yield put(signInSuccess(token));
+  yield put(signInSuccess(token, user));
 
   history.push('/deliveries');
 }
