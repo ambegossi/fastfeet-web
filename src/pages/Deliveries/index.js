@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import { Form, Input } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
 import {
   MdKeyboardArrowRight,
   MdKeyboardArrowLeft,
@@ -109,6 +110,22 @@ export default function Deliveries() {
       pathname: '/deliveries/edit',
       state: { delivery },
     });
+  }
+
+  async function handleDelete(deliveryId) {
+    const confirmation = window.confirm(
+      'Tem certeza que deseja apagar esta encomenda?'
+    );
+
+    if (confirmation === true) {
+      try {
+        await api.delete(`deliveries/${deliveryId}`);
+        toast.success('Encomenda excluída com sucesso');
+        loadDeliveries(page);
+      } catch (err) {
+        toast.error('Não foi possível excluir a encomenda');
+      }
+    }
   }
 
   return (
@@ -235,7 +252,7 @@ export default function Deliveries() {
                       <MdCreate color="#4D85EE" />
                       <span>Editar</span>
                     </li>
-                    <li>
+                    <li onClick={() => handleDelete(delivery.id)}>
                       <MdDeleteForever color="#DE3B3B" />
                       <span>Excluir</span>
                     </li>
