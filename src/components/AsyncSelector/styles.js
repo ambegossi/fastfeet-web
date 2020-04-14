@@ -56,10 +56,4 @@ export const selectorStyles = {
     minHeight: '1px',
     paddingBottom: '3px',
   }),
-  loadingMessage: (provided) => ({
-    ...provided,
-    content: 'Carregando',
-  }),
 };
-
-export const loadingMessage = 'Procurando';

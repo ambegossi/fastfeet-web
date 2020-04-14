@@ -63,6 +63,30 @@ export default function DeliveryEdit({ location }) {
     setProductInput(e.target.value);
   }
 
+  function filterRecipients(inputValue) {
+    return recipients.filter((r) =>
+      r.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }
+
+  function filterDeliverymen(inputValue) {
+    return deliverymen.filter((d) =>
+      d.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }
+
+  function promiseRcpOptions(inputValue, callback) {
+    setTimeout(() => {
+      callback(filterRecipients(inputValue));
+    }, 100);
+  }
+
+  function promiseDmnOptions(inputValue, callback) {
+    setTimeout(() => {
+      callback(filterDeliverymen(inputValue));
+    }, 100);
+  }
+
   async function updateDelivery(data) {
     try {
       await api.put(`deliveries/${data.id}`, {
@@ -101,9 +125,12 @@ export default function DeliveryEdit({ location }) {
                 styles={selectorStyles}
                 onChange={handleRecipientInput}
                 defaultOptions={recipients}
+                loadOptions={promiseRcpOptions}
                 defaultInputValue={delivery.recipient.name}
                 defaultValue={delivery.recipient.id}
                 placeholder="Selecionar"
+                loadingMessage={() => 'Carregando...'}
+                noOptionsMessage={() => 'Nenhuma opção encontrada'}
               />
             </div>
           </FirstLineInput>
@@ -114,9 +141,12 @@ export default function DeliveryEdit({ location }) {
                 styles={selectorStyles}
                 onChange={handleDeliverymanInput}
                 defaultOptions={deliverymen}
+                loadOptions={promiseDmnOptions}
                 defaultInputValue={delivery.deliveryman.name}
                 defaultValue={delivery.deliveryman.id}
                 placeholder="Selecionar"
+                loadingMessage={() => 'Carregando...'}
+                noOptionsMessage={() => 'Nenhuma opção encontrada'}
               />
             </div>
           </FirstLineInput>
