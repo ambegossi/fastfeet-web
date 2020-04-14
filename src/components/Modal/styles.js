@@ -16,7 +16,6 @@ export const ModalCard = styled.div`
   width: 450px;
   height: 353px;
   z-index: 50;
-  margin-bottom: 100px;
   background: white;
   border-radius: 5px;
   padding: 15px;

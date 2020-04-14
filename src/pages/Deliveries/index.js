@@ -104,6 +104,13 @@ export default function Deliveries() {
     setModalOpen(!modalOpen);
   }
 
+  function handleEdit(delivery) {
+    history.push({
+      pathname: '/deliveries/edit',
+      state: { delivery },
+    });
+  }
+
   return (
     <Container>
       <h1>Gerenciador de encomendas</h1>
@@ -224,7 +231,7 @@ export default function Deliveries() {
                         </Modal>
                       )}
                     </li>
-                    <li>
+                    <li onClick={() => handleEdit(delivery)}>
                       <MdCreate color="#4D85EE" />
                       <span>Editar</span>
                     </li>
