@@ -15,6 +15,8 @@ import {
   DeliverymanTd,
   StatusTd,
   PageNav,
+  ActionsWrapper,
+  ActionsIcon,
 } from './styles';
 
 import api from '~/services/api';
@@ -23,6 +25,7 @@ import history from '~/services/history';
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
   const [page, setPage] = useState(1);
+  const [actionsMenu, setActionsMenu] = useState(null);
 
   async function loadDeliveries(pageSelected, q) {
     const response = await api.get('deliveries', {
@@ -60,6 +63,10 @@ export default function Deliveries() {
 
   function decrement() {
     setPage(page - 1);
+  }
+
+  function toggleMenu(deliveryId) {
+    setActionsMenu(deliveryId);
   }
 
   return (
@@ -125,6 +132,9 @@ export default function Deliveries() {
                     </StatusTd>
                   ) : null}
                 </td>
+                <ActionsWrapper onClick={() => toggleMenu(delivery.id)}>
+                  <ActionsIcon size={30} />
+                </ActionsWrapper>
               </tr>
             ))}
           </Table>

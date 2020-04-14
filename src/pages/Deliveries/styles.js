@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
-import { MdSearch } from 'react-icons/md';
+import { MdSearch, MdMoreHoriz } from 'react-icons/md';
 
 const handleStatusBgColor = (status) => {
   switch (status) {
@@ -154,4 +154,16 @@ export const PageNav = styled.div`
     font-size: 20px;
     padding: 0 15px;
   }
+`;
+
+export const ActionsWrapper = styled.div`
+  width: 30px;
+  margin-left: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+`;
+
+export const ActionsIcon = styled(MdMoreHoriz)`
+  color: #c6c6c6;
 `;
