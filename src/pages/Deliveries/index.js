@@ -217,6 +217,9 @@ export default function Deliveries() {
                           <Wrapper>
                             <DeliveryInfo>
                               <strong>Informações da encomenda</strong>
+                              <span>
+                                Produto: {`${selectedDelivery.product}`}
+                              </span>
                               <span>{`${selectedDelivery.recipient.street}, ${selectedDelivery.recipient.street_number}`}</span>
                               <span>{`${selectedDelivery.recipient.city} - ${selectedDelivery.recipient.state}`}</span>
                               <span>{selectedDelivery.recipient.zip_code}</span>
