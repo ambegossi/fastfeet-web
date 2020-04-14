@@ -113,7 +113,7 @@ export default function DeliveryEdit({ location }) {
     <Container>
       <UpdateRow
         title="Edição de encomendas"
-        updateFunction={updateDelivery}
+        saveFunction={updateDelivery}
         data={uploadData}
       />
       <FormContainer>

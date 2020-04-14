@@ -6,7 +6,7 @@ import { Container, ButtonsWrapper } from './styles';
 
 import history from '~/services/history';
 
-export default function TopLine({ title, updateFunction, data }) {
+export default function TopLine({ title, saveFunction, data }) {
   return (
     <Container>
       <h1>{title}</h1>
@@ -15,7 +15,7 @@ export default function TopLine({ title, updateFunction, data }) {
           <MdKeyboardArrowLeft size={20} color="#fff" />
           <span>VOLTAR</span>
         </button>
-        <button type="submit" onClick={() => updateFunction(data)}>
+        <button type="submit" onClick={() => saveFunction(data)}>
           <MdCheck size={20} color="#fff" />
           <span>SALVAR</span>
         </button>
@@ -26,6 +26,6 @@ export default function TopLine({ title, updateFunction, data }) {
 
 TopLine.propTypes = {
   title: PropTypes.string.isRequired,
-  updateFunction: PropTypes.func.isRequired,
+  saveFunction: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
