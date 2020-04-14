@@ -11,6 +11,7 @@ import {
 
 import AddButton from '~/components/AddButton';
 import Empty from '~/components/Empty';
+import Modal from '~/components/Modal';
 
 import {
   Container,
@@ -24,14 +25,23 @@ import {
   ActionsWrapper,
   ActionsIcon,
   ActionsMenu,
+  Wrapper,
+  DeliveryInfo,
+  DateInfo,
+  WithdrawalDate,
+  DeliveryDate,
+  Signature,
 } from './styles';
 
 import api from '~/services/api';
 import history from '~/services/history';
+import formatDate from '~/utils/formatDate';
 
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
   const [page, setPage] = useState(1);
+  const [selectedDelivery, setSelectedDelivery] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
 
   async function loadDeliveries(pageSelected, q) {
     const response = await api.get('deliveries', {
@@ -82,6 +92,16 @@ export default function Deliveries() {
     });
 
     setDeliveries(formattedDeliveries);
+  }
+
+  async function handleModal(deliveryId) {
+    const deliveryFound = await deliveries.find(
+      (delivery) => delivery.id === deliveryId
+    );
+    deliveryFound.formattedStartDate = formatDate(deliveryFound.start_date);
+    deliveryFound.formattedEndDate = formatDate(deliveryFound.end_date);
+    setSelectedDelivery(deliveryFound);
+    setModalOpen(!modalOpen);
   }
 
   return (
@@ -153,9 +173,56 @@ export default function Deliveries() {
                     onClick={() => toggleMenu(delivery.id)}
                   />
                   <ActionsMenu showActionsMenu={delivery.showActionsMenu}>
-                    <li>
+                    <li
+                      onClick={() => {
+                        handleModal(delivery.id);
+                        delivery.showActionsMenu = false;
+                      }}
+                    >
                       <MdRemoveRedEye color="#8E5BE8" />
                       <span>Visualizar</span>
+                      {modalOpen && (
+                        <Modal open={modalOpen}>
+                          <Wrapper>
+                            <DeliveryInfo>
+                              <strong>Informações da encomenda</strong>
+                              <span>{`${selectedDelivery.recipient.street}, ${selectedDelivery.recipient.street_number}`}</span>
+                              <span>{`${selectedDelivery.recipient.city} - ${selectedDelivery.recipient.state}`}</span>
+                              <span>{selectedDelivery.recipient.zip_code}</span>
+                            </DeliveryInfo>
+                            <DateInfo>
+                              <strong>Datas</strong>
+                              <WithdrawalDate>
+                                <span>Retirada: </span>
+                                <span>
+                                  {selectedDelivery.formattedStartDate ||
+                                    'Pendente'}
+                                </span>
+                              </WithdrawalDate>
+                              <DeliveryDate>
+                                <span>Entrega: </span>
+                                <span>
+                                  {selectedDelivery.formattedEndDate ||
+                                    'Pendente'}
+                                </span>
+                              </DeliveryDate>
+                            </DateInfo>
+                            <Signature>
+                              <strong>Assinatura do destinatário</strong>
+                              {selectedDelivery.signature ? (
+                                <img
+                                  src={selectedDelivery.signature.url}
+                                  alt="Assinatura do destinatário"
+                                />
+                              ) : (
+                                <span>
+                                  Assinatura ainda não registrada no sistema
+                                </span>
+                              )}
+                            </Signature>
+                          </Wrapper>
+                        </Modal>
+                      )}
                     </li>
                     <li>
                       <MdCreate color="#4D85EE" />
