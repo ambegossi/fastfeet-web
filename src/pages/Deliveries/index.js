@@ -74,6 +74,11 @@ export default function Deliveries() {
     loadDeliveries(page);
   }, [page]);
 
+  function handleSearch({ searchInput }) {
+    const q = searchInput;
+    loadDeliveries(null, q);
+  }
+
   function increment() {
     setPage(page + 1);
   }
@@ -132,8 +137,10 @@ export default function Deliveries() {
     <Container>
       <h1>Gerenciador de encomendas</h1>
       <SearchRow>
-        <Form>
-          <SearchIcon size={19} color="#999" />
+        <Form onSubmit={handleSearch}>
+          <button type="submit">
+            <SearchIcon size={19} color="#999" />
+          </button>
           <Input name="searchInput" placeholder="Buscar por encomendas" />
         </Form>
         <AddButton onClick={() => history.push('/deliveries/register')} />

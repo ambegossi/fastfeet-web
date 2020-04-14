@@ -65,11 +65,18 @@ export const SearchRow = styled.div`
         color: #999;
       }
     }
+
+    button {
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+    }
   }
 `;
 
 export const SearchIcon = styled(MdSearch)`
-  margin: 0 5px 0 15px;
+  margin: 0 5px 0 10px;
 `;
 
 export const TableWrapper = styled.div`
