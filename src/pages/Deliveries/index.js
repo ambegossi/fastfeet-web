@@ -1,7 +1,13 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import { Form, Input } from '@rocketseat/unform';
-import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
+import {
+  MdKeyboardArrowRight,
+  MdKeyboardArrowLeft,
+  MdRemoveRedEye,
+  MdCreate,
+  MdDeleteForever,
+} from 'react-icons/md';
 
 import AddButton from '~/components/AddButton';
 import Empty from '~/components/Empty';
@@ -17,6 +23,7 @@ import {
   PageNav,
   ActionsWrapper,
   ActionsIcon,
+  ActionsMenu,
 } from './styles';
 
 import api from '~/services/api';
@@ -25,7 +32,6 @@ import history from '~/services/history';
 export default function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
   const [page, setPage] = useState(1);
-  const [actionsMenu, setActionsMenu] = useState(null);
 
   async function loadDeliveries(pageSelected, q) {
     const response = await api.get('deliveries', {
@@ -66,7 +72,16 @@ export default function Deliveries() {
   }
 
   function toggleMenu(deliveryId) {
-    setActionsMenu(deliveryId);
+    const formattedDeliveries = deliveries.map((delivery) => {
+      if (delivery.id === deliveryId) {
+        delivery.showActionsMenu = !delivery.showActionsMenu;
+      } else {
+        delivery.showActionsMenu = false;
+      }
+      return delivery;
+    });
+
+    setDeliveries(formattedDeliveries);
   }
 
   return (
@@ -132,8 +147,25 @@ export default function Deliveries() {
                     </StatusTd>
                   ) : null}
                 </td>
-                <ActionsWrapper onClick={() => toggleMenu(delivery.id)}>
-                  <ActionsIcon size={30} />
+                <ActionsWrapper>
+                  <ActionsIcon
+                    size={30}
+                    onClick={() => toggleMenu(delivery.id)}
+                  />
+                  <ActionsMenu showActionsMenu={delivery.showActionsMenu}>
+                    <li>
+                      <MdRemoveRedEye color="#8E5BE8" />
+                      <span>Visualizar</span>
+                    </li>
+                    <li>
+                      <MdCreate color="#4D85EE" />
+                      <span>Editar</span>
+                    </li>
+                    <li>
+                      <MdDeleteForever color="#DE3B3B" />
+                      <span>Excluir</span>
+                    </li>
+                  </ActionsMenu>
                 </ActionsWrapper>
               </tr>
             ))}
