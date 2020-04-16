@@ -71,7 +71,7 @@ export default function RecipientsEdit({ location }) {
     street_number: Yup.string().required(),
     complement: Yup.string().nullable(),
     city: Yup.string().required(),
-    zip_code: Yup.string().min(8).max(9).required(),
+    zip_code: Yup.string().min(7).max(9).required(),
   });
 
   async function updateRecipient(data) {

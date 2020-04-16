@@ -9,6 +9,7 @@ export const Container = styled.div`
 `;
 
 export const FormContainer = styled.div`
+  padding: 20px 0;
   margin-top: 30px;
   width: 100%;
   background-color: #fff;

@@ -10,6 +10,7 @@ export const Container = styled.div`
 
 export const FormContainer = styled.div`
   margin-top: 30px;
+  padding: 20px 0;
   width: 100%;
   background-color: #fff;
   border-radius: 4px;
