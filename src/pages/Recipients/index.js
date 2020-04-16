@@ -121,7 +121,7 @@ export default function Recipients() {
             </tr>
 
             {recipients.map((recipient) => (
-              <tr>
+              <tr key={recipient.id}>
                 <IdTd>{`#${recipient.id}`}</IdTd>
                 <NameTd>{recipient.name}</NameTd>
                 <AddressTd>{`${recipient.street}, ${recipient.street_number}, ${recipient.city} - ${recipient.state}`}</AddressTd>

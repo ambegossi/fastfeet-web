@@ -128,7 +128,7 @@ export default function Deliverymen() {
             </tr>
 
             {deliverymen.map((deliveryman) => (
-              <tr>
+              <tr key={deliveryman.id}>
                 <td>{`#${deliveryman.id}`}</td>
                 <AvatarTd>
                   <img

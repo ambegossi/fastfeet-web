@@ -94,7 +94,7 @@ export default function Problems() {
             </tr>
 
             {problems.map((problem) => (
-              <tr>
+              <tr key={problem.id}>
                 <IdTd>
                   {problem.delivery_id
                     ? `#${problem.delivery_id}`
