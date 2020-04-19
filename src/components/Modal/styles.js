@@ -14,7 +14,7 @@ export const ModalWrapper = styled.div`
 export const ModalCard = styled.div`
   position: relative;
   width: 450px;
-  height: 353px;
+  height: 390px;
   z-index: 50;
   background: white;
   border-radius: 5px;

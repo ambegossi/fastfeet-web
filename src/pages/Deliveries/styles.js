@@ -295,6 +295,7 @@ export const Signature = styled.div`
     align-self: center;
     width: 234px;
     height: 60px;
+    background-size: cover;
   }
   span {
     color: #666666;
